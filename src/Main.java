@@ -11,9 +11,7 @@ public class Main {
     
     public static void mainMenu() {
           int userChoice;
-        // used so we can pass it to encrypt method
-        StringBuilder hb = new StringBuilder("");
-       
+   
         /*
         **Menu for user navigation**
         */
