@@ -12,10 +12,10 @@ public class User {
     private String encryptedPassword;  // Can change
     private int encryptionKey;  // Can change
     
-    public User(String username, String encryptedPassword, int encryptionKey) {
+    public User(String username, String encryptedPassword, int key) {
         this.username = username;
         this.encryptedPassword = encryptedPassword;
-        this.encryptionKey = encryptionKey;
+        this.encryptionKey = key;
     }
     
     // Getters
