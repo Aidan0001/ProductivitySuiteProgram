@@ -12,6 +12,7 @@ public class User {
     private String encryptedPassword;  // Can change
     private int encryptionKey;  // Can change
     
+    // Builder
     public User(String username, String encryptedPassword, int key) {
         this.username = username;
         this.encryptedPassword = encryptedPassword;
