@@ -24,8 +24,8 @@ public class Authentication {
         System.out.println("Enter your password: ");
         String password = myScan.nextLine();
         
-        int key = generateRandomKey();
-        String encryptedPassword = encrypt(password, key);
+        int key =  EncryptionHelpers.generateKey(); // Calls generate key
+        String encryptedPassword = EncryptionHelpers.encrypt(password, key); // Calls encryption method
         
         User newUser = new User(username, encryptedPassword, key);
                 
