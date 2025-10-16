@@ -1,6 +1,4 @@
-
 import java.util.Scanner;
-import java.io.*;
 
 public class Authentication {
     static Scanner myScan = new Scanner(System.in);
@@ -8,22 +6,28 @@ public class Authentication {
     public static void main(String[] args) {
         
     }
-    
-    /**
+    /*
      *User Register method.
-     * {@return the name} {@code null} if unknown  
      */
     public static User register() {
         System.out.println("Enter your username: ");
         String username = myScan.nextLine();
         
+        if(!InputValidator.isNotEmpty(username, username)) return null;
+        if(!InputValidator.meetsMinLength(username, 3, username)) return null;
+        if(!InputValidator.noCommas(username, username)) return null;
+        
         if(FileHandler.userExists(username)) {
             System.out.println("Username already exists.");
             return null;
         }
-        
+
         System.out.println("Enter your password: ");
         String password = myScan.nextLine();
+        
+        if(!InputValidator.isNotEmpty(password, "Password")) return null;
+        if(!InputValidator.meetsMinLength(password, 6, "Password")) return null;
+        if(!InputValidator.noCommas(password, "Password")) return null;
         
         int key =  EncryptionHelpers.generateKey(); // Calls generate key
         String encryptedPassword = EncryptionHelpers.encrypt(password, key); // Calls encryption method
@@ -35,10 +39,8 @@ public class Authentication {
         System.out.println("Registration successful.");
         return newUser;
     }
- 
-     /**
+     /*
      *User Login method.
-     * {@return the name} {@code null} if unknown  
      */
     public static User login() {
         System.out.println("Enter username: ");
@@ -56,25 +58,33 @@ public class Authentication {
         
         String decryptedPassword = EncryptionHelpers.decrypt(user.getEncryptedPassword(), user.getEncryptionKey());
         
-        if(password.equals(decryptedPassword)){
-            System.out.println("Login Successful!");
-            return user;
-        } else {
+        if(!password.equals(decryptedPassword)){
             System.out.println("Incorrect password!");
             return null;
         }
+        System.out.println("Login Succssful!");
+        return user;
     }
 
     public static void mainMenu() {
         Scanner myScan = new Scanner(System.in);
-        User currentUser = null;
+        User currentUser;
         int userChoice;
         
         do {
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("0. Exit");
+           
+            if(myScan.hasNextInt()) {
             userChoice = myScan.nextInt();
+            myScan.nextLine();
+            } else {
+                System.out.println("Invalid input. Pleaes enter a number.");
+                myScan.nextLine();
+                userChoice = -1;
+            }
+            
             switch(userChoice) {
                 default -> System.out.println("Invalid choice."); 
 
@@ -101,10 +111,19 @@ public class Authentication {
             System.out.println("4. Expense Tracker");
             System.out.println("5. Hangman");
             System.out.println("0. Log out");
+            
+            if(myScan.hasNextInt()) {
             userChoice = myScan.nextInt();
+            myScan.nextLine();
+            } else {
+                System.out.println("Invalid input. Pleaes enter a number.");
+                myScan.nextLine();
+                userChoice = -1;
+            }
+            
             switch(userChoice) {
                 default -> System.out.println("Invalid choice.");
-                case 0 -> System.out.println("Exitting...");
+                case 0 -> System.out.println("Logging out...");
                 case 1 -> System.out.println("Do something");
                 case 2 -> System.out.println("Do something");
                 case 3 -> System.out.println("Do something");

@@ -1,24 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Aidan0001
- */
 public class User {
     private final String username;  // Final - never changes
     private String encryptedPassword;  // Can change
     private int encryptionKey;  // Can change
-    
     // Builder
     public User(String username, String encryptedPassword, int key) {
         this.username = username;
         this.encryptedPassword = encryptedPassword;
         this.encryptionKey = key;
     }
-    
     // Getters
     public String getUsername() { 
         return username; }
